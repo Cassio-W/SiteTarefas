@@ -18,14 +18,27 @@ export class UsersService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} user`;
+    return this.databaseSerice.user.findUnique({
+      where: {
+        id,
+      }
+    });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+    return this.databaseSerice.user.update({
+      where: {
+        id,
+      },
+      data: updateUserDto,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} user`;
+    return this.databaseSerice.user.delete({
+      where: {
+        id,
+      }
+    });
   }
 }
