@@ -2,31 +2,49 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { DatabaseService } from 'src/database/database.service';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly databaseSerice: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
+  
+  async create(createUserDto: CreateUserDto) {
 
-  create(createUserDto: CreateUserDto) {
-    return this.databaseSerice.user.create({
-      data: createUserDto
+    const existingEmail = await this.databaseService.user.findUnique({
+      where: {
+        email: createUserDto.email,
+      }
+    })
+
+    if (existingEmail) {
+      throw new Error('Email already registered')
+    }
+
+    const hashedPassword = await this.generateHash(createUserDto.password);
+
+    return this.databaseService.user.create({
+      data: {
+        ...createUserDto,
+        password: hashedPassword,
+      }
+      
     })
   }
 
-  findAll() {
-    return this.databaseSerice.user.findMany();
+  async findAll() {
+    return this.databaseService.user.findMany();
   }
 
-  findOne(id: number) {
-    return this.databaseSerice.user.findUnique({
+  async findOne(id: number) {
+    return this.databaseService.user.findUnique({
       where: {
         id,
       }
     });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return this.databaseSerice.user.update({
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    return this.databaseService.user.update({
       where: {
         id,
       },
@@ -34,11 +52,16 @@ export class UsersService {
     });
   }
 
-  remove(id: number) {
-    return this.databaseSerice.user.delete({
+  async remove(id: number) {
+    return this.databaseService.user.delete({
       where: {
         id,
       }
     });
+  }
+
+  async generateHash(password: string) {
+    const saltRounds = 10;
+    return await bcrypt.hash(password, saltRounds)
   }
 }
