@@ -3,7 +3,7 @@ import { IsDate, IsEmail, IsNotEmpty, IsString, IsStrongPassword } from "class-v
 export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
-  name: string;
+  username: string;
 
   @IsEmail()
   email: string;

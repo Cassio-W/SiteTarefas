@@ -60,7 +60,7 @@ export class UsersService {
     });
   }
 
-  async generateHash(password: string) {
+  private async generateHash(password: string) {
     const saltRounds = 10;
     return await bcrypt.hash(password, saltRounds)
   }
