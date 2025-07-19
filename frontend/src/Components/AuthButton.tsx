@@ -1,8 +1,13 @@
+// type AuthMethod = {
+//   onClick: () => void;
+// }
 
 
 function AuthButton() {
   return(
-    <button>Confirmar</button>
+    <>
+      <button className="p-100" type="submit">Confirmar</button>
+    </>
   )
   
 }
