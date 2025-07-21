@@ -16,6 +16,6 @@ export async function register(username: string, email: string, password: string
   return await api.post('/users', {
     username,
     email,
-    password, 
+    password,
   })
 }
