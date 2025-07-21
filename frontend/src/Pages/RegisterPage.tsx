@@ -1,8 +1,9 @@
-import AuthCard from "../components/AuthCard.tsx";
-import Input from "../components/AuthInput.tsx";
-import AuthButton from "../components/AuthButton.tsx";
+import AuthCard from "../components/auth/AuthCard.tsx";
+import Input from "../components/auth/AuthInput.tsx";
+import AuthButton from "../components/auth/AuthButton.tsx";
 import { useState } from "react";
 import { register } from "../services/auth.ts";
+import AuthRememberCheck from "../components/auth/AuthRememberCheck.tsx";
 
 function RegisterCard() {
   const [username, setUsername] = useState('')
@@ -11,6 +12,8 @@ function RegisterCard() {
   
   async function handleRegister() {
     const response = await register(username, email, password)
+
+    alert('Cadastro completo')
 
     return response.data
   }
@@ -41,9 +44,7 @@ function RegisterCard() {
         autoComplete="password"
       />
       <div className="flex justify-start items text-sm gap-10 mb-3">
-        <label className="flex items-center gap-2">
-          <input type="checkbox"/> Lembre-se de mim
-        </label>
+        <AuthRememberCheck/>
       </div>
       <AuthButton/>
       <div className="my-2 text-sm">

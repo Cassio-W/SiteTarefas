@@ -1,4 +1,4 @@
-import "../Styles/input.css"
+import "../../Styles/input.css"
 
 type InputProp = {
   placeholder: string

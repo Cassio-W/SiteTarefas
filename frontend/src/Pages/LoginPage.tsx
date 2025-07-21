@@ -1,8 +1,9 @@
-import AuthCard from "../components/AuthCard.tsx";
-import Input from "../components/AuthInput.tsx";
-import AuthButton from "../components/AuthButton.tsx";
+import AuthCard from "../components/auth/AuthCard.tsx";
+import Input from "../components/auth/AuthInput.tsx";
+import AuthButton from "../components/auth/AuthButton.tsx";
 import { login } from "../services/auth.ts";
 import { useState } from "react";
+import AuthRememberCheck from "../components/auth/AuthRememberCheck.tsx";
 
 function LoginCard() {
   const [email, setEmail] = useState('')
@@ -33,11 +34,9 @@ function LoginCard() {
           value={password} 
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
           autoComplete="current-password"
-          />
+        />
         <div className="flex justify-between items-center text-sm gap-10 mb-3">
-          <label className="flex items-center gap-2">
-            <input type="checkbox"/> Lembre-se de mim
-          </label>
+          <AuthRememberCheck/>
           <a href="/login">Esqueceu sua senha?</a>
         </div>
         <AuthButton/>
