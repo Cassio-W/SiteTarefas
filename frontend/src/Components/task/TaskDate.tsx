@@ -4,7 +4,7 @@ type DateProp = {
 
 function TaskDate({ date }: DateProp) {
   return(
-    <div>{date}</div>
+    <div className="text-xl">{date}</div>
   )
 }
 

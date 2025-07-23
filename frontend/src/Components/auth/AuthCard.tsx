@@ -9,7 +9,7 @@ function AuthCard({children, onSubmit}: AuthCardProps) {
       <form onSubmit={(e) => {
         e.preventDefault();
         onSubmit(e);
-      }} className="w-sm bg-gray-800 p-6 rounded-xl shadow-md w-full max-w-md flex justify-center items-center flex-col gap-2">
+      }} className="w-sm bg-gray-800 p-6 rounded-xl shadow-md w-full max-w-md flex justify-center items-center flex-col gap-2 border-blue-800 border-5 relative">
         {children}
       </form>
     </div>

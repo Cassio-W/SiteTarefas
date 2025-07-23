@@ -1,14 +1,13 @@
-.input {
-  background-color: #303136;
-  border-radius: 5px; 
-  color: rgb(225, 223, 223);
-  padding: 6px;
+input {
+  /* border-radius: 5px;  */
+  /* color: rgb(225, 223, 223); */
+  /* padding: 6px; */
   transition: box-shadow 0.2s;
-  margin: 10px 0px;
-  width: 80%;
-  border: 2px solid rgb(63, 70, 118);
+  /* margin: 10px 0px; */
+  /* width: 80%; */
+  /* border: 2px solid rgb(63, 70, 118); */
 }
 
-.input::placeholder {
+input::placeholder {
   color: rgb(105, 107, 110);
 }

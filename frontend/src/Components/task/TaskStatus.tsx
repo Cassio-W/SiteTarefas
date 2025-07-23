@@ -1,23 +1,23 @@
 import "../../styles/status.css"
 
 type StatusProp = {
-  statusName: string
+  statusId: number;
 }
 
-function TaskStatus({ statusName }: StatusProp) {
-  let statusClass = "";
+function TaskStatus({ statusId }: StatusProp) {
+  let statusTitle = 'Pendente';
   
-  switch (statusName) {
-    case "Em Andamento": statusClass = "andamento"; break;
-    case "Concluido": statusClass = "concluido"; break;
+  switch (statusId) {
+    case 1: statusTitle = "Concluído"; break;
+    case 2: statusTitle = "Em Andamento"; break;
     default: break;
   }
   
   return(
     <>
-      <div className="flex flex-col gap-2 justify-center items-center px-5">
-        <div className={"bg-[#b4babf] p-10 rounded-full border-4 " + statusClass}></div>
-        <div className="text-xl text-center">{statusName}</div>
+      <div className="flex flex-col gap-2 justify-center items-center w-35">
+        <button className={"bg-[#b4babf] p-5 rounded-full border-4 hover:opacity-70  status-" + statusId}></button>
+        <div className="text-xl text-center">{statusTitle}</div>
       </div>   
     </>
   )

@@ -1,9 +1,9 @@
-.concluido {
+.status-1 {
   background-color: rgb(0, 255, 225);
   border-color: rgb(1, 174, 163);
 }
 
-.andamento {
+.status-2 {
   background-color: rgb(255, 145, 0);
   border-color: rgb(123, 70, 0);
 }

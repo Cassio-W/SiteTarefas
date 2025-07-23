@@ -1,4 +1,4 @@
-import "../../Styles/input.css"
+
 
 type InputProp = {
   placeholder: string
@@ -11,12 +11,12 @@ type InputProp = {
 function Input({placeholder, type, value, onChange, autoComplete}: InputProp) {
   return(
     <input 
-    className="input" 
-    type={type} 
-    placeholder={placeholder}
-    value={value}
-    onChange={onChange}
-    autoComplete={autoComplete}
+      className="bg-gray-900 rounded text-white p-[6px] my-[10px] w-4/5 border-2 border-blue-900" 
+      type={type} 
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      autoComplete={autoComplete}
     />
   )
 }
