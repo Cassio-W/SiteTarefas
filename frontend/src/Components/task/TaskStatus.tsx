@@ -15,7 +15,7 @@ function TaskStatus({ statusId }: StatusProp) {
   
   return(
     <>
-      <div className="flex flex-col gap-2 justify-center items-center w-35">
+      <div className="flex flex-col gap-2 justify-center items-center w-1/6">
         <button className={"bg-[#b4babf] p-5 rounded-full border-4 hover:opacity-70  status-" + statusId}></button>
         <div className="text-xl text-center">{statusTitle}</div>
       </div>   

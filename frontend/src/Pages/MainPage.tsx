@@ -1,11 +1,53 @@
 import Task from "../components/task/Task.tsx"
-import SideBar from "../components/sidebar/sidebar.tsx"
+import SideBar from "../components/sidebar/SideBar.tsx"
 import NewTaskCard from "../components/task/NewTaskCard.tsx"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { findAllTasks } from "../services/tasks.ts"
+import { useNavigate } from "react-router-dom"
+import "../styles/index.css"
+import DeleteTaskConfirmation from "../components/task/DeleteTaskConfirmation.tsx"
 
 
 function MainPage() {
   const [isCreatingNewTask = false, setCreatingNewTask] = useState(Boolean)
+  const [isDeletingTask = false, setDeletingTask] = useState(Boolean)
+  const [tasks = [], setTasks] = useState<Task[]>([])
+  const [taskId, setTaskId] = useState('')
+
+  const navigate = useNavigate()
+
+  type Task = {
+    id: string
+    title: string;
+    description: string;
+    status: string;
+    finalDate: string;
+  }
+
+  function formatDate(date: string) {
+    const newDate = new Date(date)
+    return newDate.toLocaleDateString("pt-BR", {month: 'short', day: '2-digit'})
+  }
+
+  function deleteTaskFromState() {
+    setTasks(tasks => tasks.filter(task => task.id !== taskId))
+  }
+
+  async function getTasks() {
+    const token = localStorage.getItem('token') || ''
+    const tasks = await findAllTasks(token);
+
+    if(!tasks) {
+      navigate('/login');
+    }
+
+    setTasks(tasks);
+  }
+    
+
+  useEffect(() => {
+    getTasks();
+  }, [])
   
   return (
     <>
@@ -13,46 +55,32 @@ function MainPage() {
       <div className="sidebar w-1/3 border h-full">
         <SideBar/>
       </div>
-      <div className="w-2/3 border m-10 p-10">
+      <div className="w-2/3 border m-10 p-10 relative">
         <search>
           <form className="flex rounded-xl border mb-8 p-5 text-3xl">
             <input className="w-4/5" placeholder="Pesquisar"/>
             <button className="w-1/5 border rounded-xl py-2">Confirmar</button>
           </form>
         </search>
-        
-        <div className="tasks border static flex-col items-center justify-center">
-          <button onClick={() => setCreatingNewTask(true)} className="absolute bottom-30 right-30 bg-gray-900 rounded-full px-4 py-2.5 items-center">+</button>
-          <Task 
-            title="Titulo"
-            descricao=""
-            statusId={1}
-            date="data"
-          />
-          <Task 
-            title="Titulo"
-            descricao="teste descricao, teste descricao teste descricao, teste descricao"
-            statusId={3}
-            date="data"
-          />
-          <Task 
-            title="Titulo"
-            descricao="teste descricao, teste descricao teste descricao, teste descricao"
-            statusId={2}
-            date="data"
-          />
-          <Task 
-            title="Titulo"
-            descricao="teste descricao, teste descricao teste descricao, teste descricao"
-            statusId={3}
-            date="data"
-          />
-        </div>   
-
+        <button onClick={() => setCreatingNewTask(true)} className="absolute bottom-5 right-5 bg-gray-900 rounded-full px-4 py-2.5 text-xl">+</button>      
+        <div className="tasks-container flex-col items-center overflow-auto w-full h-150 px-5 inset-shadow-xs">
+          {tasks.map(task => (
+            <Task
+              key={task.id}
+              taskId={task.id}
+              title={task.title}
+              descricao={task.description}
+              date={formatDate(task.finalDate)}
+              openDeleteTaskConfirmation={() => {setDeletingTask(true)}}
+              setTaskId={setTaskId}
+            />
+          ))}
+        </div>         
       </div>
 
       <div className="absolute w-full">
-        {isCreatingNewTask && <NewTaskCard closeNewTaskCard={() => {setCreatingNewTask(false)}}/>}
+        {isCreatingNewTask && <NewTaskCard closeCardFunction={() => {setCreatingNewTask(false)}}/>}
+        {isDeletingTask && <DeleteTaskConfirmation closeCardFunction={() => {setDeletingTask(false)}} taskId={taskId} deleteTaskFromState={deleteTaskFromState}/>}
       </div>
 
 

@@ -1,10 +1,10 @@
 type DateProp = {
-  date: string;
+  date?: string;
 }
 
-function TaskDate({ date }: DateProp) {
+function TaskDate({ date = "" }: DateProp) {
   return(
-    <div className="text-xl">{date}</div>
+    <div className="text-xl justify-end flex">{date}</div>
   )
 }
 
