@@ -30,7 +30,7 @@ export class TasksService {
     return this.databaseService.task.findMany();
   }
 
-  async create(id = 1, createTaskDto: CreateTaskDto) {
+  async create(id, createTaskDto: CreateTaskDto) {
     return this.databaseService.task.create({
       data: {
         ...createTaskDto,

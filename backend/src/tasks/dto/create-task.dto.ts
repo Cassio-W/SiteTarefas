@@ -1,4 +1,4 @@
-import { IsDate, IsDateString, IsEnum, IsNotEmpty, IsString } from "class-validator";
+import { IsDate, IsDateString, IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 
 export class CreateTaskDto {
@@ -8,6 +8,7 @@ export class CreateTaskDto {
   title: string;
 
   @IsString()
+  @IsOptional()
   description: string;
 
   @IsEnum(['Aguardando', 'Concluido', 'Em_Andamento'], {
@@ -16,5 +17,6 @@ export class CreateTaskDto {
   status: 'Aguardando' | 'Concluido' | 'Em_Andamento';
 
   @IsDateString()
+  @IsOptional()
   finalDate: string;
 }

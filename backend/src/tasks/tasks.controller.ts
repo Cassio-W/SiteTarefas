@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, UseGuards, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, Request, UseGuards, ValidationPipe } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { TasksService } from './tasks.service';
@@ -15,9 +15,10 @@ export class TasksController {
     return this.taskService.findAll(search);
   }
 
-  @Post(':id')
-  create(@Param('id', ParseIntPipe) id: number, @Body(ValidationPipe) createTaskDto: CreateTaskDto) {
-    return this.taskService.create(id, createTaskDto);
+  @Post()
+  create(@Request() req, @Body(ValidationPipe) createTaskDto: CreateTaskDto) {
+    const userId = req.user.sub;
+    return this.taskService.create(userId, createTaskDto);
   }
 
   @Patch(':id')
