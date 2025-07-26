@@ -2,9 +2,9 @@ import { api } from "./api.ts";
 
 type CreateTask = {
   title: string;
-  description?: string;
-  status?: string;
-  date?: string;
+  description?: string | null;
+  status?: string | null;
+  finalDate?: string | null;
 }
 
 export async function findAllTasks(token: string) {
@@ -25,18 +25,19 @@ export async function findAllTasks(token: string) {
   }
 }
 
-export async function createTask(token: string, { title, description, status = 'Aguardando', date }: CreateTask) {
+export async function createTask(token: string, { title, description = null, status = 'Pendente', finalDate = null }: CreateTask) {
   try {
-    await api.post('/tasks', {
+    const response = await api.post('/tasks', {
       title,
       description,
       status,
-      date
+      finalDate
     }, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
+    return response.data;
   } catch (err) {
     return console.log('Erro ao criar task')
   } 

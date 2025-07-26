@@ -6,31 +6,30 @@ import { findAllTasks } from "../services/tasks.ts"
 import { useNavigate } from "react-router-dom"
 import "../styles/index.css"
 import DeleteTaskConfirmation from "../components/task/DeleteTaskConfirmation.tsx"
+import type { TaskType } from "../types/index.ts"
 
 
 function MainPage() {
   const [isCreatingNewTask = false, setCreatingNewTask] = useState(Boolean)
   const [isDeletingTask = false, setDeletingTask] = useState(Boolean)
-  const [tasks = [], setTasks] = useState<Task[]>([])
+  const [tasks = [], setTasks] = useState<TaskType[]>([])
   const [taskId, setTaskId] = useState('')
-
+  
   const navigate = useNavigate()
 
-  type Task = {
-    id: string
-    title: string;
-    description: string;
-    status: string;
-    finalDate: string;
-  }
-
   function formatDate(date: string) {
+    if (!date) return
+    
     const newDate = new Date(date)
     return newDate.toLocaleDateString("pt-BR", {month: 'short', day: '2-digit'})
   }
 
   function deleteTaskFromState() {
     setTasks(tasks => tasks.filter(task => task.id !== taskId))
+  }
+
+  function addTaskInState(task: TaskType) {
+    setTasks(tasks => [...tasks, task])
   }
 
   async function getTasks() {
@@ -68,6 +67,7 @@ function MainPage() {
             <Task
               key={task.id}
               taskId={task.id}
+              statusName={task.status}
               title={task.title}
               descricao={task.description}
               date={formatDate(task.finalDate)}
@@ -79,7 +79,7 @@ function MainPage() {
       </div>
 
       <div className="absolute w-full">
-        {isCreatingNewTask && <NewTaskCard closeCardFunction={() => {setCreatingNewTask(false)}}/>}
+        {isCreatingNewTask && <NewTaskCard closeCardFunction={() => {setCreatingNewTask(false)}} addTaskInState={addTaskInState}/>}
         {isDeletingTask && <DeleteTaskConfirmation closeCardFunction={() => {setDeletingTask(false)}} taskId={taskId} deleteTaskFromState={deleteTaskFromState}/>}
       </div>
 

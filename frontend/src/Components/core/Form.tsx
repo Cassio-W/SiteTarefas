@@ -6,10 +6,7 @@ type FormProps = {
 
 function Form({children, onSubmit}: FormProps) {
   return (
-    <form onSubmit={(e) => {
-      e.preventDefault();
-      onSubmit(e);
-    }}>
+    <form onSubmit={(e) => {e.preventDefault(); onSubmit(e);}} className="flex justify-center items-center flex-col gap-2 relative">
       {children}
     </form>
   )

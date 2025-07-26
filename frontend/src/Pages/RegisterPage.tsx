@@ -20,7 +20,7 @@ function RegisterCard() {
   }
   
   return (
-    <Card>
+    <Card hasForm={true}>
       <Form onSubmit={handleRegister}>
         <h1 className="mb-5">Cadastro</h1>
         <Input 

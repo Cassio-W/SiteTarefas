@@ -27,7 +27,7 @@ function LoginCard() {
   }
 
   return (
-    <Card>
+    <Card hasForm={true}>
       <Form onSubmit={handleLogin}>
         <h1 className="mb-5">Login</h1>
           <Input 

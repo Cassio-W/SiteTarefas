@@ -4,7 +4,7 @@ type DateProp = {
 
 function TaskDate({ date = "" }: DateProp) {
   return(
-    <div className="text-xl justify-end flex">{date}</div>
+    <div className="text-xl justify-end flex h-10">{date}</div>
   )
 }
 

@@ -4,7 +4,7 @@ import TaskText from "./TaskText.tsx";
 
 type TaskProps = {
   taskId: string;
-  statusId?: number;
+  statusName?: string;
   title: string;
   descricao?: string;
   date?: string;
@@ -12,10 +12,23 @@ type TaskProps = {
   setTaskId: (response: string) => void
 }
 
-function Task({ taskId, statusId = 0, title, descricao = '', date = '', openDeleteTaskConfirmation, setTaskId }: TaskProps) {
+function Task({ taskId, statusName = '', title, descricao = '', date = '', openDeleteTaskConfirmation, setTaskId }: TaskProps) {
+  function getStatusId(statusName: string) {
+    let statusId = 0
+
+    switch (statusName){
+      case "Em_Andamento": statusId = 2; break;
+      case "Concluido": statusId = 1; break;
+      default: break;
+    } 
+      
+
+    return statusId;
+  }
+  
   return(
     <div className="bg-gray-800 p-6 rounded-xl shadow-md h-35 flex gap-10 my-3 border w-full" id={taskId}>
-      <TaskStatus statusId={statusId}/>
+      <TaskStatus statusId={getStatusId(statusName)}/>
       <TaskText title={title} descricao={descricao}/>
       <div className="left-container flex flex-col w-1/6 gap-3">
         <TaskDate date={date}/>
