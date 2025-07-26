@@ -31,3 +31,19 @@ Projeto pessoal em desenvolvimento para o meu portfólio! Um site simples onde v
 - 📅 Adicionar data final e status
 - 🔐 Cadastro e login de usuários
 - ✅ Verificação de login e autenticação via token
+
+## 🧪 Como rodar o projeto localmente
+
+Se quiser testar o projeto em sua máquina local, siga os passos abaixo:
+
+1. Clone o repositório.
+2. Instale as dependências:
+   ```bash
+   cd frontend && npm install
+   cd ../backend && npm install
+   cd ..
+   npm install
+
+3. Inicie o projeto com:
+   ```bash
+   npm run dev
