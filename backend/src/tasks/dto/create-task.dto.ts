@@ -11,10 +11,11 @@ export class CreateTaskDto {
   @IsOptional()
   description: string;
 
-  @IsEnum(['Aguardando', 'Concluido', 'Em_Andamento'], {
+  @IsOptional()
+  @IsEnum(['Pendente', 'Concluido', 'Em_Andamento'], {
     message: 'Status incorrect'
   })
-  status: 'Aguardando' | 'Concluido' | 'Em_Andamento';
+  status: 'Pendente' | 'Concluido' | 'Em_Andamento';
 
   @IsDateString()
   @IsOptional()
