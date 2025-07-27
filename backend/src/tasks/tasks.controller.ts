@@ -11,8 +11,9 @@ export class TasksController {
   constructor(private readonly taskService: TasksService) {}
 
   @Get()
-  findAll(@Query('search') search?: string) {
-    return this.taskService.findAll(search);
+  findAll(@Request() req, @Query('search') search?: string) {
+    const userId = req.user.sub;
+    return this.taskService.findByUserId(userId, search);
   }
 
   @Post()

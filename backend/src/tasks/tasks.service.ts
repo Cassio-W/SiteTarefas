@@ -11,31 +11,27 @@ export class TasksService {
 
   constructor(private readonly databaseService: DatabaseService) {}
 
-  async findAll(search?: string) {
-    if (search) {
+  async findByUserId(userId: number, search?: string) {
+
       return this.databaseService.task.findMany({
-        where : {
-          title: {
-            contains: search,
-          },
-          OR: [{
-            description: {
-              contains: search,
-            },
-          }],
-        },
-      });
+        where: {
+          ownerId: userId,
+          ...(search && {
+            OR: [
+              { title: { contains: search, mode: 'insensitive' } },
+              { description: { contains: search, mode: 'insensitive' } },
+            ],
+          }),
+        }
+      })
     }
 
-    return this.databaseService.task.findMany();
-  }
-
-  async create(id, createTaskDto: CreateTaskDto) {
+  async create(userId, createTaskDto: CreateTaskDto) {
     return this.databaseService.task.create({
       data: {
         ...createTaskDto,
         owner: {
-          connect: { id, }
+          connect: { id: userId, }
         }
       }
     })
