@@ -7,9 +7,11 @@ type CreateTask = {
   finalDate?: string | null;
 }
 
-export async function findAllTasks(token: string) {
+export async function findAllTasks(token: string, search?: string) {
   try {
-    const response = await api.get('/tasks', {
+    const url = !search ? '/tasks' : `/tasks?search=${search}`;
+
+    const response = await api.get(url, {
       headers: {
         Authorization: `Bearer ${token}`
       }

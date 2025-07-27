@@ -12,8 +12,10 @@ import type { TaskType } from "../types/index.ts"
 function MainPage() {
   const [isCreatingNewTask = false, setCreatingNewTask] = useState(Boolean)
   const [isDeletingTask = false, setDeletingTask] = useState(Boolean)
-  const [tasks = [], setTasks] = useState<TaskType[]>([])
+  const [allTasks, setAllTasks] = useState<TaskType[]>([])
+  const [tasksRender, setTasksRender] = useState<TaskType[]>([])
   const [taskId, setTaskId] = useState('')
+  const [search, setSearch] = useState('')
   
   const navigate = useNavigate()
 
@@ -25,14 +27,29 @@ function MainPage() {
   }
 
   function deleteTaskFromState() {
-    setTasks(tasks => tasks.filter(task => task.id !== taskId))
+    setAllTasks(tasks => tasks.filter(task => task.id !== taskId))
   }
 
   function addTaskInState(task: TaskType) {
-    setTasks(tasks => [...tasks, task])
+    setAllTasks(tasks => [...tasks, task])
   }
 
-  async function getTasks() {
+  function getFilteredTasks() {
+    if (!search) return console.log('Trying to search without search');
+    
+    
+    const filteredTasks = allTasks.filter(task => {
+        return (
+          task.description?.toLowerCase().includes(search.toLowerCase()) ||
+          task.title.toLowerCase().includes(search.toLowerCase())
+        )           
+      }
+    )
+
+    return filteredTasks;
+  }
+
+  async function getAllTasks() {
     const token = localStorage.getItem('token') || ''
     const tasks = await findAllTasks(token);
 
@@ -40,13 +57,29 @@ function MainPage() {
       navigate('/login');
     }
 
-    setTasks(tasks);
+    setAllTasks(tasks);
+
+    return tasks;
+  }
+
+  async function renderTasks() {
+    let tasksToRender;
+
+    tasksToRender = await getAllTasks()
+  
+    if (search) {
+      tasksToRender = getFilteredTasks()
+    }
+
+    if (!tasksToRender) return console.log('Erro ao renderizar tarefas');
+    
+    setTasksRender(tasksToRender);
   }
     
 
   useEffect(() => {
-    getTasks();
-  }, [])
+    renderTasks()
+  }, [search, allTasks])
   
   return (
     <>
@@ -57,13 +90,13 @@ function MainPage() {
       <div className="w-2/3 border m-10 p-10 relative">
         <search>
           <form className="flex rounded-xl border mb-8 p-5 text-3xl">
-            <input className="w-4/5" placeholder="Pesquisar"/>
-            <button className="w-1/5 border rounded-xl py-2">Confirmar</button>
+            <input value={search} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} className="w-4/5" placeholder="Pesquisar"/>
+            {/* <button className="w-1/5 border rounded-xl py-2">Confirmar</button> */}
           </form>
         </search>
         <button onClick={() => setCreatingNewTask(true)} className="absolute bottom-5 right-5 bg-gray-900 rounded-full px-4 py-2.5 text-xl">+</button>      
         <div className="tasks-container flex-col items-center overflow-auto w-full h-150 px-5 inset-shadow-xs">
-          {tasks.map(task => (
+          {tasksRender.map(task => (
             <Task
               key={task.id}
               taskId={task.id}
