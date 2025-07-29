@@ -6,7 +6,7 @@ import { findAllTasks } from "../services/tasks.ts"
 import { useNavigate } from "react-router-dom"
 import "../styles/index.css"
 import DeleteTaskConfirmation from "../components/task/DeleteTaskConfirmation.tsx"
-import type { TaskType } from "../types/index.ts"
+import { type UserType, type TaskType } from "../types/type.ts"
 
 
 function MainPage() {
@@ -83,11 +83,11 @@ function MainPage() {
   
   return (
     <>
-    <div className="flex">
-      <div className="sidebar w-1/3 border h-full">
+    <div className="flex m-5 gap-10">
+      <aside className="sidebar w-1/4 border">
         <SideBar/>
-      </div>
-      <div className="w-2/3 border m-10 p-10 relative">
+      </aside>
+      <main className="w-3/4 border p-10 relative">
         <search>
           <form className="flex rounded-xl border mb-8 p-5 text-3xl">
             <input value={search} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} className="w-4/5" placeholder="Pesquisar"/>
@@ -95,7 +95,7 @@ function MainPage() {
           </form>
         </search>
         <button onClick={() => setCreatingNewTask(true)} className="absolute bottom-5 right-5 bg-gray-900 rounded-full px-4 py-2.5 text-xl">+</button>      
-        <div className="tasks-container flex-col items-center overflow-auto w-full h-150 px-5 inset-shadow-xs">
+        <section className="tasks-container flex-col items-center overflow-auto w-full h-150 inset-shadow-xs">
           {tasksRender.map(task => (
             <Task
               key={task.id}
@@ -108,13 +108,33 @@ function MainPage() {
               setTaskId={setTaskId}
             />
           ))}
-        </div>         
-      </div>
+            {/* <Task 
+              taskId="1"
+              statusName="Concluido"
+              openDeleteTaskConfirmation={() => {setDeletingTask(true)}}
+              setTaskId={setTaskId}
+              title="Tarefa Teste" 
+            />
+            <Task 
+              taskId="2"
+              statusName="Em_Andamento"
+              openDeleteTaskConfirmation={() => {setDeletingTask(true)}}
+              setTaskId={setTaskId}
+              title="Tarefa Teste" 
+            />
+            <Task 
+              taskId="3"
+              openDeleteTaskConfirmation={() => {setDeletingTask(true)}}
+              setTaskId={setTaskId}
+              title="Tarefa Teste" 
+            /> */}
+        </section>         
+      </main>
 
-      <div className="absolute w-full">
+      <section className="hidden-cards absolute w-full">
         {isCreatingNewTask && <NewTaskCard closeCardFunction={() => {setCreatingNewTask(false)}} addTaskInState={addTaskInState}/>}
         {isDeletingTask && <DeleteTaskConfirmation closeCardFunction={() => {setDeletingTask(false)}} taskId={taskId} deleteTaskFromState={deleteTaskFromState}/>}
-      </div>
+      </section>
 
 
     </div>

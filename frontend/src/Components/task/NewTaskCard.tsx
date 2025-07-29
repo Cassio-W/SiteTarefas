@@ -5,8 +5,8 @@ import { createTask } from "../../services/tasks"
 import Button from "../core/Button.tsx"
 import { useNavigate } from "react-router-dom"
 import Form from "../core/Form.tsx"
-import type { TaskType } from "../../types/index.ts"
-import type { StatusType } from "../../types/index.ts"
+import type { TaskType } from "../../types/type.ts"
+import type { StatusType } from "../../types/type.ts"
 
 type NewTaskProp = {
   closeCardFunction: () => void

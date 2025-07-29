@@ -16,12 +16,13 @@ export async function findAllTasks(token: string, search?: string) {
         Authorization: `Bearer ${token}`
       }
     })
+
     return response.data;
 
   } catch(err: any) {
       if (err.response.status === 401) {
         localStorage.removeItem("token");
-        await alert('Please Login or Register')
+        alert('Please Login or Register')
       }
       return console.log("Error");
   }

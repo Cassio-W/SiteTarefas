@@ -17,13 +17,19 @@ function LoginCard() {
   async function handleLogin() {
     const response = await login(email, password);
     
-    const token = response.data;
+    const loginInfo = response.data;
+    const token = loginInfo.token;
+    const user = {
+      username: loginInfo.username,
+      email: loginInfo.email
+    }
     localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(user));
 
     
     navigate('/');
     
-    return response.data;
+    return token;
   }
 
   return (
