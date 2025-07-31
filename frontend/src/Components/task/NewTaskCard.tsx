@@ -23,6 +23,12 @@ function NewTaskCard({ closeCardFunction, addTaskInState }: NewTaskProp) {
 
   const navigate = useNavigate()
 
+  function getISOStringDate() {
+    const date = new Date(finalDate);
+    date.setHours(24);
+    return date.toISOString();
+  }
+
   async function handleCreateTask() {
     const token = localStorage.getItem('token')
 
@@ -32,11 +38,15 @@ function NewTaskCard({ closeCardFunction, addTaskInState }: NewTaskProp) {
       return console.log('Token error');
     }
 
+    const ISOStringDate = getISOStringDate()
+
+    alert(ISOStringDate)
+
     const normalizedTask = {
       title,
       description: description !== '' ? description : null,
       status,
-      finalDate: finalDate !== '' ? finalDate : null
+      finalDate: finalDate !== '' ? ISOStringDate : null
     }
     
     const task = await createTask(token, {

@@ -2,7 +2,7 @@
 //   username: string;
 // }
 
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 function SideBar() {
   const [username, setUsername] = useState('Username')
@@ -30,7 +30,7 @@ function SideBar() {
       <div className="flex flex-col gap-10 m-5 h-150">
         <div className="user-container flex gap-5 border p-5">
           <div className="bg-purple-600 flex items-center justify-center w-15 h-15 rounded-full border-4 hover:opacity-70 font-bold">{username.charAt(0).toUpperCase()}</div>
-          <div className="text-3xl flex items-center justify-center">Usuario</div>
+          <div className="text-3xl flex items-center justify-center">{username}</div>
         </div>
         <div className="other-pages-container border p-5 flex flex-col gap-5">
           <div className="componente-de-lista flex flex-col gap-2">

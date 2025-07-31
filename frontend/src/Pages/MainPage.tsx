@@ -6,7 +6,7 @@ import { findAllTasks } from "../services/tasks.ts"
 import { useNavigate } from "react-router-dom"
 import "../styles/index.css"
 import DeleteTaskConfirmation from "../components/task/DeleteTaskConfirmation.tsx"
-import { type UserType, type TaskType } from "../types/type.ts"
+import { type TaskType } from "../types/type.ts"
 
 
 function MainPage() {
