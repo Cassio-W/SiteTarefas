@@ -1,7 +1,6 @@
 import Card from "../components/core/Card.tsx";
 import Input from "../components/core/Input.tsx";
-import Button from "../components/core/Button.tsx";
-import { login } from "../services/auth.ts";
+import { login, setUserOnLocalStorage } from "../services/auth.ts";
 import { useState } from "react";
 import AuthRememberCheck from "../components/auth/AuthRememberCheck.tsx";
 import { useNavigate } from "react-router-dom";
@@ -16,17 +15,7 @@ function LoginCard() {
   
   async function handleLogin() {
     const response = await login(email, password);
-    
-    const loginInfo = response.data;
-    const token = loginInfo.token;
-    const user = {
-      username: loginInfo.username,
-      email: loginInfo.email
-    }
-    localStorage.setItem('token', token);
-    localStorage.setItem('user', JSON.stringify(user));
-
-    
+    const token = await setUserOnLocalStorage(response)
     navigate('/');
     
     return token;
@@ -54,7 +43,9 @@ function LoginCard() {
             <AuthRememberCheck/>
             <a href="/login">Esqueceu sua senha?</a>
           </div>
-          <Button text='Confirmar'/>
+          <button className="button-default" type="submit">
+            Confirmar
+          </button>
         
         <div className="my-2 text-sm">
           Não possue uma conta? <a href="/register">Cadastre-se</a>

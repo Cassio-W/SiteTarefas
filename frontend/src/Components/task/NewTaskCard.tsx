@@ -2,7 +2,6 @@ import { useState, type ChangeEvent } from "react"
 import Card from "../core/Card.tsx"
 import Input from "../core/Input.tsx"
 import { createTask } from "../../services/tasks"
-import Button from "../core/Button.tsx"
 import { useNavigate } from "react-router-dom"
 import Form from "../core/Form.tsx"
 import type { TaskType } from "../../types/type.ts"
@@ -40,8 +39,6 @@ function NewTaskCard({ closeCardFunction, addTaskInState }: NewTaskProp) {
 
     const ISOStringDate = getISOStringDate()
 
-    alert(ISOStringDate)
-
     const normalizedTask = {
       title,
       description: description !== '' ? description : null,
@@ -61,7 +58,6 @@ function NewTaskCard({ closeCardFunction, addTaskInState }: NewTaskProp) {
   
   
   return (
-    <div>
       <Card hasForm={true}>
         <Form onSubmit={handleCreateTask}>
           <div onClick={closeCardFunction} className="text-red-400 absolute top-[-20px] right-[-5px] text-5xl">x</div>
@@ -89,10 +85,11 @@ function NewTaskCard({ closeCardFunction, addTaskInState }: NewTaskProp) {
             value={finalDate}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {setDate(e.target.value)}}
           />
-          <Button text='Criar'/>
+          <button className="default-button" type="submit">
+            Criar
+          </button>
         </Form>
       </Card>
-    </div>
   )
 }
 

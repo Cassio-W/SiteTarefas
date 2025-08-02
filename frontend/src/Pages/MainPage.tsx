@@ -10,8 +10,8 @@ import { type TaskType } from "../types/type.ts"
 
 
 function MainPage() {
-  const [isCreatingNewTask = false, setCreatingNewTask] = useState(Boolean)
-  const [isDeletingTask = false, setDeletingTask] = useState(Boolean)
+  const [isCreatingNewTask, setCreatingNewTask] = useState(false)
+  const [isDeletingTask, setDeletingTask] = useState(false)
   const [allTasks, setAllTasks] = useState<TaskType[]>([])
   const [tasksRender, setTasksRender] = useState<TaskType[]>([])
   const [taskId, setTaskId] = useState('')
@@ -82,7 +82,6 @@ function MainPage() {
   }, [search, allTasks])
   
   return (
-    <>
     <div className="flex m-5 gap-10">
       <aside className="sidebar w-1/4 border">
         <SideBar/>
@@ -135,11 +134,7 @@ function MainPage() {
         {isCreatingNewTask && <NewTaskCard closeCardFunction={() => {setCreatingNewTask(false)}} addTaskInState={addTaskInState}/>}
         {isDeletingTask && <DeleteTaskConfirmation closeCardFunction={() => {setDeletingTask(false)}} taskId={taskId} deleteTaskFromState={deleteTaskFromState}/>}
       </section>
-
-
     </div>
-      
-    </>  
   )
 }
 
