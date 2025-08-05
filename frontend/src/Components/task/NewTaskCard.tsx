@@ -58,7 +58,7 @@ function NewTaskCard({ closeCardFunction, addTaskInState }: NewTaskProp) {
   
   
   return (
-      <Card hasForm={true}>
+      <Card>
         <Form onSubmit={handleCreateTask}>
           <div onClick={closeCardFunction} className="text-red-400 absolute top-[-20px] right-[-5px] text-5xl">x</div>
           <h1 className="p-5">Nova Tarefa</h1>
@@ -74,10 +74,14 @@ function NewTaskCard({ closeCardFunction, addTaskInState }: NewTaskProp) {
             value={description}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {setDescription(e.target.value)}}
           />
-          <select value={status} onChange={(e: ChangeEvent<HTMLSelectElement>) => {setStatus(e.target.value as StatusType)}}>
-            <option value="Pendente">Pendente</option>
-            <option value="Em_Andamento">Em Andamento</option>
-            <option value="Concluido">Concluido</option>
+          <select 
+          value={status} 
+          onChange={(e: ChangeEvent<HTMLSelectElement>) => {setStatus(e.target.value as StatusType)}}
+          className="bg-blue-500 border-2 rounded-md p-3 w-4/5 hover:opacity-70 duration-300 ease-out"
+          >
+            <option className="bg-gray-500" value="Pendente">Pendente</option>
+            <option className="bg-orange-500" value="Em_Andamento">Em Andamento</option>
+            <option className="bg-cyan-500" value="Concluido">Concluido</option>
           </select>
           <Input
             placeholder="Data"
@@ -85,7 +89,7 @@ function NewTaskCard({ closeCardFunction, addTaskInState }: NewTaskProp) {
             value={finalDate}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {setDate(e.target.value)}}
           />
-          <button className="default-button" type="submit">
+          <button className="button-default" type="submit">
             Criar
           </button>
         </Form>

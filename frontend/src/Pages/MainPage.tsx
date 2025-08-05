@@ -107,30 +107,10 @@ function MainPage() {
               setTaskId={setTaskId}
             />
           ))}
-            {/* <Task 
-              taskId="1"
-              statusName="Concluido"
-              openDeleteTaskConfirmation={() => {setDeletingTask(true)}}
-              setTaskId={setTaskId}
-              title="Tarefa Teste" 
-            />
-            <Task 
-              taskId="2"
-              statusName="Em_Andamento"
-              openDeleteTaskConfirmation={() => {setDeletingTask(true)}}
-              setTaskId={setTaskId}
-              title="Tarefa Teste" 
-            />
-            <Task 
-              taskId="3"
-              openDeleteTaskConfirmation={() => {setDeletingTask(true)}}
-              setTaskId={setTaskId}
-              title="Tarefa Teste" 
-            /> */}
         </section>         
       </main>
 
-      <section className="hidden-cards absolute w-full">
+      <section className="hidden-cards absolute w-screen bg-black/50">
         {isCreatingNewTask && <NewTaskCard closeCardFunction={() => {setCreatingNewTask(false)}} addTaskInState={addTaskInState}/>}
         {isDeletingTask && <DeleteTaskConfirmation closeCardFunction={() => {setDeletingTask(false)}} taskId={taskId} deleteTaskFromState={deleteTaskFromState}/>}
       </section>

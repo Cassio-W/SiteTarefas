@@ -24,7 +24,7 @@ export async function findAllTasks(token: string, search?: string) {
         localStorage.removeItem("token");
         alert('Please Login or Register')
       }
-      alert("Find Tasks Error");
+      console.log("Find Tasks Error");
   }
 }
 
@@ -42,7 +42,7 @@ export async function createTask(token: string, { title, description = null, sta
     })
     return response.data;
   } catch (err) {
-    return alert('Create Task Error')
+    return console.log('Create Task Error')
   } 
 }
 
@@ -55,7 +55,7 @@ export async function deleteTask(token: string, taskId: string) {
     })
     return
   } catch (err) {
-    return alert('Delete Task Error');
+    return console.log('Delete Task Error');
   }
 }
 

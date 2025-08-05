@@ -22,7 +22,7 @@ function LoginCard() {
   }
 
   return (
-    <Card hasForm={true}>
+    <Card>
       <Form onSubmit={handleLogin}>
         <h1 className="mb-5">Login</h1>
           <Input 

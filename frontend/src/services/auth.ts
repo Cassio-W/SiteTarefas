@@ -20,7 +20,7 @@ export async function register(username: string, email: string, password: string
       password,
     })
   } catch (err) {
-    alert('Register Error'); 
+    console.log('Register Error'); 
   }
   
 }
