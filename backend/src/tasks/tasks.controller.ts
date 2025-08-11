@@ -16,6 +16,11 @@ export class TasksController {
     return this.taskService.findByUserId(userId, search);
   }
 
+  @Get(':id')
+  findByTaskId(@Param('id', ParseIntPipe) id: number) {
+    return this.taskService.findByTaskId(id)
+  }
+
   @Post()
   create(@Request() req, @Body(ValidationPipe) createTaskDto: CreateTaskDto) {
     const userId = req.user.sub;

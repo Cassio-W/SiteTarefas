@@ -26,6 +26,14 @@ export class TasksService {
       })
     }
 
+  async findByTaskId(taskId: number) {
+    return this.databaseService.task.findUnique({
+      where: {
+        id: taskId
+      }
+    })
+  }
+
   async create(userId, createTaskDto: CreateTaskDto) {
     return this.databaseService.task.create({
       data: {
