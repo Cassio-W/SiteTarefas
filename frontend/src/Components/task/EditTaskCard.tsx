@@ -73,7 +73,7 @@ type EditTaskProps = {
       cardText="Editar Tarefa"
       values={{
         title,
-        description: "aaaaaa",
+        description,
         status,
         finalDate
       }}
