@@ -44,10 +44,11 @@ h1 {
   font-family: inherit;
   background-color: #186cb1;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s ease-out;
 }
 .button-default:hover {
   border-color: #646cff;
+  opacity: 80%;
 }
 .button-default:focus,
 .button-default:focus-visible {

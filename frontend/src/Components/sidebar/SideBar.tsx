@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Card from "../core/Card";
+// import Card from "../core/Card";
 import AccountConfigCard from "./AccountConfigCard";
 
 function SideBar() {
@@ -28,7 +28,7 @@ function SideBar() {
     <div className="flex flex-col gap-10 m-5 h-150">
       <div className="user-container relative flex gap-5 border p-5">
         <div className="">
-          <button onClick={() => setConfigAccount(!isConfigAccount)} className="bg-purple-600 flex items-center justify-center w-15 h-15 rounded-full border-4 font-bold hover:opacity-70 border">
+          <button onClick={() => setConfigAccount(!isConfigAccount)} className="hover:cursor-pointer bg-purple-600 flex items-center justify-center w-15 h-15 rounded-full border-4 font-bold hover:opacity-70 border">
             {username.charAt(0).toUpperCase()}
           </button>
           {isConfigAccount && <AccountConfigCard closeCardFunction={() => setConfigAccount(false)}/>}

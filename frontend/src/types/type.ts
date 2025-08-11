@@ -13,3 +13,10 @@ export type UserType = {
 }
 
 export type StatusType = 'Pendente' | 'Em_Andamento' | 'Concluido';
+
+export type ValuesType = {
+  title: string
+  description: string
+  status: StatusType
+  finalDate: string
+}

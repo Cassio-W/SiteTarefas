@@ -7,6 +7,13 @@ type CreateTask = {
   finalDate?: string | null;
 }
 
+type UpdateTask = {
+  title?: string | null;
+  description?: string | null;
+  status?: string | null;
+  finalDate?: string | null;
+}
+
 export async function findAllTasks(token: string, search?: string) {
   try {
     const url = !search ? '/tasks' : `/tasks?search=${search}`;
@@ -28,6 +35,21 @@ export async function findAllTasks(token: string, search?: string) {
   }
 }
 
+export async function findUniqueTask(token: string, taskId: string) {
+  try {
+    const response = await api.get(`/tasks/${taskId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    return response.data;
+
+  } catch(err: any) {
+      console.log("Find Unique Tasks Error");
+  }
+}
+
 export async function createTask(token: string, { title, description = null, status = 'Pendente', finalDate = null }: CreateTask) {
   try {
     const response = await api.post('/tasks', {
@@ -46,6 +68,21 @@ export async function createTask(token: string, { title, description = null, sta
   } 
 }
 
+export async function updateTask(token: string, taskId: string, task: UpdateTask) {
+  try {
+    const response = await api.patch(`/tasks/${taskId}`, {
+      ...task
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    return response.data;
+  } catch (err) {
+    return console.log('Update Task Error')
+  } 
+}
+
 export async function deleteTask(token: string, taskId: string) {
   try {
     await api.delete(`/tasks/${taskId}`, {
@@ -57,5 +94,16 @@ export async function deleteTask(token: string, taskId: string) {
   } catch (err) {
     return console.log('Delete Task Error');
   }
+}
+
+export function getISOStringDate(date: string) {
+  const newDate = new Date(date);
+  newDate.setHours(24);
+  return newDate.toISOString();
+}
+
+export function getDefaultStringDate(isoDate: string) {
+  const newDate = new Date(isoDate).toISOString().split("T")[0];
+  return newDate;
 }
 

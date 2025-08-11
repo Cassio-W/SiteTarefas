@@ -7,12 +7,14 @@ import { useNavigate } from "react-router-dom"
 import "../styles/index.css"
 import DeleteTaskConfirmation from "../components/task/DeleteTaskConfirmation.tsx"
 import { type TaskType } from "../types/type.ts"
+import EditTaskCard from "../components/task/EditTaskCard.tsx"
 
 
 function MainPage() {
   const [isCreatingNewTask, setCreatingNewTask] = useState(false)
   const [isDeletingTask, setDeletingTask] = useState(false)
-  const [allTasks, setAllTasks] = useState<TaskType[]>([])
+  const [isEditingTask, setEditingTask] = useState(false)
+  const [tasks, setTasks] = useState<TaskType[]>([])
   const [tasksRender, setTasksRender] = useState<TaskType[]>([])
   const [taskId, setTaskId] = useState('')
   const [search, setSearch] = useState('')
@@ -27,18 +29,28 @@ function MainPage() {
   }
 
   function deleteTaskFromState() {
-    setAllTasks(tasks => tasks.filter(task => task.id !== taskId))
+    setTasks(tasks => tasks.filter(task => task.id !== taskId))
   }
 
   function addTaskInState(task: TaskType) {
-    setAllTasks(tasks => [...tasks, task])
+    setTasks(tasks => [...tasks, task])
+  }
+
+  function updateTaskInState(taskUpdate: TaskType) {
+    setTasks(tasks.map(task => {
+      if (task.id === taskId) {
+        const updatedTask = taskUpdate;
+        return updatedTask;
+      }
+      return task;
+    }))
   }
 
   function getFilteredTasks() {
     if (!search) return console.log('Trying to search without search');
     
     
-    const filteredTasks = allTasks.filter(task => {
+    const filteredTasks = tasks.filter(task => {
         return (
           task.description?.toLowerCase().includes(search.toLowerCase()) ||
           task.title.toLowerCase().includes(search.toLowerCase())
@@ -57,7 +69,7 @@ function MainPage() {
       navigate('/login');
     }
 
-    setAllTasks(tasks);
+    setTasks(tasks);
 
     return tasks;
   }
@@ -79,7 +91,7 @@ function MainPage() {
 
   useEffect(() => {
     renderTasks()
-  }, [search, allTasks])
+  }, [search, tasks])
   
   return (
     <div className="flex m-5 gap-10">
@@ -93,7 +105,7 @@ function MainPage() {
             {/* <button className="w-1/5 border rounded-xl py-2">Confirmar</button> */}
           </form>
         </search>
-        <button onClick={() => setCreatingNewTask(true)} className="absolute bottom-5 right-5 bg-gray-900 rounded-full px-4 py-2.5 text-xl">+</button>      
+        <button onClick={() => setCreatingNewTask(true)} className="hover:cursor-pointer absolute bottom-5 right-5 bg-gray-900 rounded-full px-4 py-2.5 text-xl">+</button>      
         <section className="tasks-container flex-col items-center overflow-auto w-full h-150 inset-shadow-xs">
           {tasksRender.map(task => (
             <Task
@@ -104,6 +116,7 @@ function MainPage() {
               descricao={task.description}
               date={formatDate(task.finalDate)}
               openDeleteTaskConfirmation={() => {setDeletingTask(true)}}
+              openEditingTaskCard={() => setEditingTask(true)}
               setTaskId={setTaskId}
             />
           ))}
@@ -113,6 +126,7 @@ function MainPage() {
       <section className="hidden-cards absolute w-screen bg-black/50">
         {isCreatingNewTask && <NewTaskCard closeCardFunction={() => {setCreatingNewTask(false)}} addTaskInState={addTaskInState}/>}
         {isDeletingTask && <DeleteTaskConfirmation closeCardFunction={() => {setDeletingTask(false)}} taskId={taskId} deleteTaskFromState={deleteTaskFromState}/>}
+        {isEditingTask && <EditTaskCard closeCardFunction={() => {setEditingTask(false)}} taskId={taskId} updateTaskInState={updateTaskInState}/>}
       </section>
     </div>
   )

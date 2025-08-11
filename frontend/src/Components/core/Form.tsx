@@ -1,7 +1,6 @@
 type FormProps = {
   children: React.ReactNode;
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => any;
-  extraClasses?: string;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
 function Form({children, onSubmit}: FormProps) {

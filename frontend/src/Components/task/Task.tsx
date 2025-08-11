@@ -9,10 +9,12 @@ type TaskProps = {
   descricao?: string;
   date?: string;
   openDeleteTaskConfirmation: () => void
+  openEditingTaskCard: () => void
   setTaskId: (response: string) => void
+  
 }
 
-function Task({ taskId, statusName = '', title, descricao = '', date = '', openDeleteTaskConfirmation, setTaskId }: TaskProps) {
+function Task({ taskId, statusName = '', title, descricao = '', date = '', openDeleteTaskConfirmation, openEditingTaskCard, setTaskId }: TaskProps) {
   function getStatusId(statusName: string) {
     let statusId = 0
 
@@ -33,7 +35,7 @@ function Task({ taskId, statusName = '', title, descricao = '', date = '', openD
       <div className="left-container flex flex-col w-1/6 gap-3">
         <TaskDate date={date}/>
         <div className="relative buttons flex justify-center gap-5">
-          <button className="button-default !bg-red-500">
+          <button onClick={() => {openEditingTaskCard(); setTaskId(taskId);}} className="button-default !bg-red-500">
             Edit
           </button>
           <button onClick={() => {openDeleteTaskConfirmation(); setTaskId(taskId);}} className="button-default !bg-red-500">         
