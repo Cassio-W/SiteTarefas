@@ -2,7 +2,7 @@ import { useState } from "react"
 import { createTask, getISOStringDate } from "../../services/tasks"
 import type { TaskType } from "../../types/type.ts"
 import type { StatusType } from "../../types/type.ts"
-import TaskInputCard from "./TaskInputCard.tsx"
+import TaskInputCard from "./TaskInputCard"
 
 type NewTaskProp = {
   closeCardFunction: () => void

@@ -1,10 +1,10 @@
-import Card from "../components/core/Card.tsx";
-import Input from "../components/core/Input.tsx";
+import Card from "../components/core/Card";
+import Input from "../components/core/Input";
 import { login, setUserOnLocalStorage } from "../services/auth.ts";
 import { useState } from "react";
-import AuthRememberCheck from "../components/auth/AuthRememberCheck.tsx";
+import AuthRememberCheck from "../components/auth/AuthRememberCheck";
 import { useNavigate } from "react-router-dom";
-import Form from "../components/core/Form.tsx";
+import Form from "../components/core/Form";
 
 function LoginPage() {
   const [email, setEmail] = useState('')

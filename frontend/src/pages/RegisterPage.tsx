@@ -1,9 +1,9 @@
-import Card from "../components/core/Card.tsx";
-import Input from "../components/core/Input.tsx";
+import Card from "../components/core/Card";
+import Input from "../components/core/Input";
 import { useState } from "react";
 import { login, register, setUserOnLocalStorage } from "../services/auth.ts";
-import AuthRememberCheck from "../components/auth/AuthRememberCheck.tsx";
-import Form from "../components/core/Form.tsx";
+import AuthRememberCheck from "../components/auth/AuthRememberCheck";
+import Form from "../components/core/Form";
 import { useNavigate } from "react-router-dom";
 
 function RegisterPage() {

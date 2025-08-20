@@ -1,6 +1,6 @@
-import TaskDate from "./TaskDate.tsx";
-import TaskStatus from "./TaskStatus.tsx";
-import TaskText from "./TaskText.tsx";
+import TaskDate from "./TaskDate";
+import TaskStatus from "./TaskStatus";
+import TaskText from "./TaskText";
 
 type TaskProps = {
   taskId: string;

@@ -1,13 +1,13 @@
-import Task from "../components/task/Task.tsx"
-import SideBar from "../components/sidebar/SideBar.tsx"
-import NewTaskCard from "../components/task/NewTaskCard.tsx"
+import Task from "../components/task/Task"
+import SideBar from "../components/sidebar/SideBar"
+import NewTaskCard from "../components/task/NewTaskCard"
 import { useEffect, useState } from "react"
 import { findAllTasks } from "../services/tasks.ts"
 import { useNavigate } from "react-router-dom"
 import "../styles/index.css"
-import DeleteTaskConfirmation from "../components/task/DeleteTaskConfirmation.tsx"
+import DeleteTaskConfirmation from "../components/task/DeleteTaskConfirmation"
 import { type TaskType } from "../types/type.ts"
-import EditTaskCard from "../components/task/EditTaskCard.tsx"
+import EditTaskCard from "../components/task/EditTaskCard"
 
 
 function MainPage() {
