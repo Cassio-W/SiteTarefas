@@ -66,7 +66,7 @@ function MainPage() {
     const tasks = await findAllTasks(token);
 
     if(!tasks) {
-      navigate('/#/login');
+      navigate('/login');
     }
 
     setTasks(tasks);
