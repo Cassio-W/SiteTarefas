@@ -18,9 +18,9 @@ function RegisterPage() {
     if (!registered) return
     alert('Cadastro completo')
     
-    const response = await login(email, password) 
+    const response = await login(email, password);
     const token = await setUserOnLocalStorage(response);
-    navigate('/');
+    navigate('/#');
     
     return token;
   }
@@ -57,7 +57,7 @@ function RegisterPage() {
           Confirmar
         </button>
         <div className="my-2 text-sm">
-          Já possue uma conta? <a href="/login">Login</a>
+          Já possue uma conta? <a href="/#/login">Login</a>
         </div>
       </Form>
     </Card>

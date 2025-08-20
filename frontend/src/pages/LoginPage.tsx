@@ -16,7 +16,7 @@ function LoginPage() {
   async function handleLogin() {
     const response = await login(email, password);
     const token = await setUserOnLocalStorage(response)
-    navigate('/');
+    navigate('/#');
     
     return token;
   }
@@ -48,7 +48,7 @@ function LoginPage() {
           </button>
         
         <div className="my-2 text-sm">
-          Não possue uma conta? <a href="/register">Cadastre-se</a>
+          Não possue uma conta? <a href="/#/register">Cadastre-se</a>
         </div>
       </Form>
     </Card>
