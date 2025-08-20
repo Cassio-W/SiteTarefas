@@ -57,6 +57,12 @@ function NewTaskCard({ closeCardFunction, addTaskInState }: NewTaskProp) {
       onSubmit={handleCreateTask}
       cardText="Nova Tarefa"
       buttonText="Criar"
+      values={{
+        title,
+        description,
+        status,
+        finalDate
+      }}
     />
   )
 }
