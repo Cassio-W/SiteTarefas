@@ -6,7 +6,7 @@ import AuthRememberCheck from "../components/auth/AuthRememberCheck.tsx";
 import Form from "../components/core/Form.tsx";
 import { useNavigate } from "react-router-dom";
 
-function RegisterCard() {
+function RegisterPage() {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -64,4 +64,4 @@ function RegisterCard() {
   );
 }
 
-export default RegisterCard; 
+export default RegisterPage; 

@@ -6,7 +6,7 @@ import AuthRememberCheck from "../components/auth/AuthRememberCheck.tsx";
 import { useNavigate } from "react-router-dom";
 import Form from "../components/core/Form.tsx";
 
-function LoginCard() {
+function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -57,4 +57,4 @@ function LoginCard() {
 
 
 
-export default LoginCard;
+export default LoginPage;
