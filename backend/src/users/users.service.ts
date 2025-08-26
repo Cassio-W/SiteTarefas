@@ -15,7 +15,7 @@ export class UsersService {
         email: createUserDto.email,
       }
     })
-
+    
     if (existingEmail) {
       throw new Error('Email already registered')
     }

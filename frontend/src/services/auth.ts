@@ -1,3 +1,4 @@
+import axios from "axios";
 import { api } from "./api";
 
 // type LoginInput = {
@@ -6,28 +7,55 @@ import { api } from "./api";
 // }
 
 export async function login(email: string, password: string) {
-  return await api.post('/auth/login', {
-    email,
-    password, 
-  })
-}
-
-export async function register(username: string, email: string, password: string) {
   try {
-    return await api.post('/users', {
-      username,
+    const data = await api.post('/auth/login', {
       email,
-      password,
+      password, 
     })
-  } catch (err) {
-    console.log('Register Error'); 
+
+    return {
+      success: true,
+      data,
+      message: ""
+    }
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      return { success: false, message:
+          (error.response?.data as { message?: string })?.message ??
+          "Login Error",
+      };
+    }
+    return { success: false, message: "Unexpected Error" };
   }
   
 }
 
-export async function setUserOnLocalStorage(response: any) {
-  console.log(typeof response);
+export async function register(username: string, email: string, password: string) {
+  try {
+    const data = await api.post('/users', {
+      username,
+      email,
+      password,
+    })
+
+    return {
+      success: true,
+      data,
+      message: ""
+    }
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      return { success: false, message:
+          (error.response?.data as { message?: string })?.message ??
+          "Register Error",
+      };
+    }
+    return { success: false, message: "Unexpected Error" };
+  }
   
+}
+
+export async function setUserOnLocalStorage(response: any) {  
   const loginInfo = response.data;
   const token = loginInfo.token;
   const user = {

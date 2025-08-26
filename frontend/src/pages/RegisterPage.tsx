@@ -14,12 +14,22 @@ function RegisterPage() {
   const navigate = useNavigate();
   
   async function handleRegister() {
-    const registered = await register(username, email, password)
-    if (!registered) return
-    alert('Cadastro completo')
+    const response = await register(username, email, password)
+
+    if (!response.success) {
+      alert(response.message);
+      return;
+    }
+    const loginResponse = await login(email, password);
+
+    if (!loginResponse.success) {
+      alert(loginResponse.message)
+      return;
+    }
     
-    const response = await login(email, password);
-    const token = await setUserOnLocalStorage(response);
+    const token = await setUserOnLocalStorage(loginResponse);
+
+    alert('Cadastro completo')
     navigate('/#');
     
     return token;

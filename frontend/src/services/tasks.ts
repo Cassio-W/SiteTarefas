@@ -29,7 +29,6 @@ export async function findAllTasks(token: string, search?: string) {
   } catch(err: any) {
       if (err.response.status === 401) {
         localStorage.removeItem("token");
-        alert('Please Login or Register')
       }
       console.log("Find Tasks Error");
   }

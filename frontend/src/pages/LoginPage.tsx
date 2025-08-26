@@ -15,7 +15,12 @@ function LoginPage() {
   
   async function handleLogin() {
     const response = await login(email, password);
-    const token = await setUserOnLocalStorage(response)
+    if (!response.success) {
+      alert(response.message);
+      return;
+    }
+
+    const token = await setUserOnLocalStorage(response);
     navigate('/#');
     
     return token;

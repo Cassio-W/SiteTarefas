@@ -66,7 +66,8 @@ function MainPage() {
     const tasks = await findAllTasks(token);
 
     if(!tasks) {
-      navigate('/login');
+      await navToLoginPage()
+      return;
     }
 
     setTasks(tasks);
@@ -86,6 +87,11 @@ function MainPage() {
     if (!tasksToRender) return console.log('Erro ao renderizar tarefas');
     
     setTasksRender(tasksToRender);
+  }
+
+  async function navToLoginPage() {
+    alert('Please Login or Register');
+    navigate('/login');
   }
     
 

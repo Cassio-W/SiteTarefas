@@ -34,7 +34,6 @@ type EditTaskProps = {
       const token = localStorage.getItem('token')
   
       if (!token) {
-        alert('Please Login or Register');
         return console.log('Token error');
       }
 
