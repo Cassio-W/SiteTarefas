@@ -20,3 +20,15 @@ export type ValuesType = {
   status: StatusType
   finalDate: string
 }
+
+export type ResponseType = {
+  success: boolean;
+  data?: LoginInfoType;
+  message?: string;
+}
+
+type LoginInfoType = {
+  token: string;
+  username: string;
+  email: string;
+}

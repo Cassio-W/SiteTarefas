@@ -1,5 +1,6 @@
 import axios from "axios";
 import { api } from "./api";
+import type { ResponseType } from "../types/type";
 
 // type LoginInput = {
 //   email: string,
@@ -8,10 +9,12 @@ import { api } from "./api";
 
 export async function login(email: string, password: string) {
   try {
-    const data = await api.post('/auth/login', {
+    const response = await api.post('/auth/login', {
       email,
       password, 
     })
+
+    const data = response.data;
 
     return {
       success: true,
@@ -21,8 +24,9 @@ export async function login(email: string, password: string) {
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
       return { success: false, message:
-          (error.response?.data as { message?: string })?.message ??
-          "Login Error",
+          // (error.response?.data as { message?: string })?.message ??
+          // "Login Error",
+          "Credenciais Inválidas"
       };
     }
     return { success: false, message: "Unexpected Error" };
@@ -32,11 +36,13 @@ export async function login(email: string, password: string) {
 
 export async function register(username: string, email: string, password: string) {
   try {
-    const data = await api.post('/users', {
+    const response = await api.post('/users', {
       username,
       email,
       password,
     })
+
+    const data = response.data;
 
     return {
       success: true,
@@ -46,8 +52,9 @@ export async function register(username: string, email: string, password: string
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
       return { success: false, message:
-          (error.response?.data as { message?: string })?.message ??
-          "Register Error",
+          // (error.response?.data as { message?: string })?.message ??
+          // "Register Error",
+          "Credenciais Inválidas"
       };
     }
     return { success: false, message: "Unexpected Error" };
@@ -55,8 +62,10 @@ export async function register(username: string, email: string, password: string
   
 }
 
-export async function setUserOnLocalStorage(response: any) {  
+export async function setUserOnLocalStorage(response: ResponseType) {  
   const loginInfo = response.data;
+  if (!loginInfo) return;
+
   const token = loginInfo.token;
   const user = {
     username: loginInfo.username,

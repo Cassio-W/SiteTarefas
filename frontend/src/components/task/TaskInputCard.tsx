@@ -20,7 +20,7 @@ function TaskInputCard({ closeCardFunction, setTitle, setDate, setStatus, setDes
   return (
     <Card>
       <Form onSubmit={onSubmit}>
-        <div onClick={closeCardFunction} className="hover:cursor-pointer text-red-400 absolute top-[-20px] right-[-5px] text-5xl">x</div>
+        <div onClick={closeCardFunction} className="hover:cursor-pointer hover:opacity-50 text-red-400 absolute top-[-20px] right-[-5px] text-5xl">x</div>
         <h1 className="p-5">{cardText}</h1>
         <Input
           placeholder="Titulo *"

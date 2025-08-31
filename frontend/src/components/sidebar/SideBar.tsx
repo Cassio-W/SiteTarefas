@@ -26,7 +26,7 @@ function SideBar() {
   
   return (
     <div className="flex flex-col gap-10 m-5 h-150">
-      <div className="user-container relative flex gap-5 border p-5">
+      <div className="user-container relative flex gap-5 border rounded-full p-5">
         <div className="">
           <button onClick={() => setConfigAccount(!isConfigAccount)} className="hover:cursor-pointer bg-purple-600 flex items-center justify-center w-15 h-15 rounded-full border-4 font-bold hover:opacity-70 border">
             {username.charAt(0).toUpperCase()}
@@ -35,19 +35,13 @@ function SideBar() {
         </div>
           <div className="text-3xl flex items-center justify-center">{username}</div>
       </div>
-      <div className="other-pages-container border p-5 flex flex-col gap-5">
+      <div className="other-pages-container border rounded-xl p-5 flex flex-col gap-5">
           <div className="componente-de-lista flex flex-col gap-2">
             <h1>Tarefas</h1>
             <li><a href="/">Todas</a></li>
             <li><a href="/">Pendentes</a></li>
             <li><a href="/">Em Andamento</a></li>
             <li><a href="/">Concluídas</a></li>
-          </div>
-
-          <div className="componente-de-lista flex flex-col gap-2">
-            <h1 className="">Outros</h1>
-            <li><a href="/">oi</a></li>
-            <li><a href="/">oi</a></li>
           </div>
       </div>
     </div>

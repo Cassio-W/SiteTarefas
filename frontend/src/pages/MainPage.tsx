@@ -66,7 +66,7 @@ function MainPage() {
     const tasks = await findAllTasks(token);
 
     if(!tasks) {
-      await navToLoginPage()
+      await navToAccesPage()
       return;
     }
 
@@ -89,9 +89,8 @@ function MainPage() {
     setTasksRender(tasksToRender);
   }
 
-  async function navToLoginPage() {
-    alert('Please Login or Register');
-    navigate('/login');
+  async function navToAccesPage() {
+    navigate('/#');
   }
     
 
