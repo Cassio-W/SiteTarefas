@@ -1,4 +1,3 @@
-
 {
   "name": "meu-projeto-fullstack",
   "scripts": {
@@ -7,6 +6,7 @@
     "start:frontend": "cd frontend && npm run dev"
   },
   "devDependencies": {
+    "@nestjs/cli": "^11.0.10",
     "concurrently": "^9.2.0"
   }
 }
