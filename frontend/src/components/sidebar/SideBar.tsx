@@ -36,13 +36,13 @@ function SideBar() {
           <div className="text-3xl flex items-center justify-center">{username}</div>
       </div>
       <div className="other-pages-container border rounded-xl p-5 flex flex-col gap-5">
-          <div className="componente-de-lista flex flex-col gap-2">
-            <h1>Tarefas</h1>
-            <li><a href="/">Todas</a></li>
-            <li><a href="/">Pendentes</a></li>
-            <li><a href="/">Em Andamento</a></li>
-            <li><a href="/">Concluídas</a></li>
-          </div>
+        <div className="componente-de-lista flex flex-col gap-2">
+          <h1>Tarefas</h1>
+          <li><a>Todas</a></li>
+          <li><a>Pendentes</a></li>
+          <li><a>Em Andamento</a></li>
+          <li><a>Concluídas</a></li>
+        </div>
       </div>
     </div>
   )
