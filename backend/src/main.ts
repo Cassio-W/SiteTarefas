@@ -7,8 +7,7 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'http://localhost:5173',
-      'https://site-tarefas-iwkl.onrender.com',
-      'https://site-tarefas-two.vercel.app'
+      'https://site-tarefas-two.vercel.app',
     ],
     credentials: true,
   })
